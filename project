@@ -10,22 +10,22 @@ services:
       MYSQL_USER: radhika
       MYSQL_PASSWORD: redhat
       MYSQL_DATABASE: mydb
-  JWos:
-    image: joomla
+  ghostos:
+    image: ghost:1-alpine
     restart: always
     depends_on:
       - dbos
     ports:
-      - 8080:80
-    environment:
-      JOOMLA_DB_HOST: dbos
-      JOOMLA_DB_USER: radhika
-      JOOMLA_DB_PASSWORD: redhat
-      JOOMLA_DB_NAME: mydb
+      - 8081:80
     volumes:
-      - wp_storage:/var/www/html
-
+      - ghost_storag_new:/var/lib/ghost
+    environment:
+      database_client: mysql
+      database_connection_host: dbos
+      database_connection_user: radhika
+      database_connection_password: redhat
+      database_connection_database: mydb
 volumes:
-   wp_storage:
-   mysql_storage:
+   ghost_storage_new:
+   mysql_storage_new:
       
